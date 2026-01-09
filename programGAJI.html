@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hitung Gaji Karyawan</title>
+    <style>
+        * {
+            font-family: "Times New Roman", Times, serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 200px;
+            padding: 5px;
+        }
+        button {
+            padding: 6px 15px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<table>
+    <tr>
+        <th>INPUTAN</th>
+        <th>OUTPUT</th>
+    </tr>
+
+    <tr>
+        <td>
+            <h3>Hitung Gaji Karyawan</h3>
+
+            Gaji Pokok (Rp):
+            <input type="number" id="gaji"><br><br>
+
+            Jumlah Jam Lembur:
+            <input type="number" id="lembur"><br><br>
+
+            <button onclick="hitungGaji()">Hitung Gaji</button>
+        </td>
+
+        <td id="hasil"></td>
+    </tr>
+</table>
+
+<script>
+function hitungGaji() {
+    let gajiPokok = parseInt(document.getElementById("gaji").value);
+    let jamLembur = parseInt(document.getElementById("lembur").value);
+
+    let totalLembur = jamLembur * 20000;
+    let gajiKotor = gajiPokok + totalLembur;
+
+    let pajak = 0;
+    if (gajiKotor < 5000000) {
+        pajak = gajiKotor * 0.05;
+    } else if (gajiKotor <= 10000000) {
+        pajak = gajiKotor * 0.10;
+    } else {
+        pajak = gajiKotor * 0.15;
+    }
+
+    let gajiBersih = gajiKotor - pajak;
+
+    document.getElementById("hasil").innerHTML =
+        "Gaji Pokok: Rp " + gajiPokok.toLocaleString("id-ID") + "<br><br>" +
+        "Total Gaji Lembur: Rp " + totalLembur.toLocaleString("id-ID") + "<br><br>" +
+        "Gaji Kotor: Rp " + gajiKotor.toLocaleString("id-ID") + "<br><br>" +
+        "Pajak: Rp " + pajak.toLocaleString("id-ID") + "<br><br>" +
+        "Gaji Bersih: Rp " + gajiBersih.toLocaleString("id-ID");
+}
+</script>
+</body>
+</html>
